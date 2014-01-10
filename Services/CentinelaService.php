@@ -56,7 +56,7 @@ class CentinelaService
 	 * 1 si solo se quiere saber el estatus de emergencia identificada por
 	 * el folio
 	 * @param array $params
-	 * @return array Estatus
+	 * @return array Estatus (puede ser un solo renglón)
 	 */
 	public function consultarStatus($params) 
 	{

@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="tlt_anerpv.key" />
+        <parameter key="tlt_anerpv.base_uri" >http://webservices.webmaps.com.mx</parameter>
+    </parameters>
+
+    <services>
+        <service id="tlt_anerpv.centinela" class="Tlt\AnerpvBundle\Services\CentinelaService">
+            <argument type="service" id="service_container"/>
+            <argument>%tlt_anerpv.key%</argument>
+            <argument>%tlt_anerpv.base_uri%</argument>
+        </service>
+    </services>
+    
+    
+
+</container>

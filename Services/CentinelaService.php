@@ -44,7 +44,6 @@ class CentinelaService
         $color = new \SoapParam($params['color'], 'color');
         $result = $soapClient->reportar($key, $folio, $longitud, $latitud, $fecha, $placa, $modelo, $color);
         $estatus = new \SimpleXmlElement($result);
-        var_dump($estatus);
         
 		return (string)$estatus;
 	}
@@ -78,8 +77,6 @@ class CentinelaService
 		$this->container = $container;
 		$this->key = $key;
 		$this->baseUri = $baseUri;
-		
-		
 	}
 	
 }

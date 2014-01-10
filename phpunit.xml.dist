@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="./Tests/bootstrap.php" colors="true">
+<phpunit bootstrap="vendor/autoload.php" colors="true">
 
     <testsuites>
         <testsuite name="TltAnerpvBundle test suite">
@@ -12,7 +12,6 @@
         <whitelist>
             <directory>./</directory>
             <exclude>
-                <file>./Routing/Loader/RestRouteLoader20.php</file>
                 <directory>./Resources</directory>
                 <directory>./Tests</directory>
                 <directory>./vendor</directory>

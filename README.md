@@ -9,14 +9,14 @@ Documentación
 La gran parte de la documentación se encuentra en el archivo `Resources/doc/index.md`
 de este bundle:
 
-[Read the Documentation for master](https://github.com/FriendsOfSymfony/FOSRestBundle/blob/master/Resources/doc/index.md)
+[Leer la documentación para master](https://github.com/FriendsOfSymfony/FOSRestBundle/blob/master/Resources/doc/index.md)
 
 
 
 Instalación
 ------------
 
-Todas las instrucciones de instalación están en [documentation](https://github.com/albertogaona/TltAnerpvBundle/blob/master/Resources/doc/index.md).
+Todas las instrucciones de instalación están en [documentación](https://github.com/albertogaona/TltAnerpvBundle/blob/master/Resources/doc/index.md).
 
 Licencia
 -------

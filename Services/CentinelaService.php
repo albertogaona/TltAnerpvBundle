@@ -16,7 +16,6 @@ class CentinelaService
 	private $wsdlReportarEmergencia = '/reportarEmergencia.php?wsdl';
 	private $wsdlConsultarStatus = '/consultarStatus.php?wsdl';
 	
-	
 	/**
 	 * Reportar emenrgencia. Los parámetros deben incluir:
 	 * folio: 0 en caso de nueva emergencia, folio previamente asignado en caso de seguimiento
@@ -67,7 +66,6 @@ class CentinelaService
         $tipo = new \SoapParam($params['consultarStatusActual']? '1': '0', 'tipo');
         $result = $soapClient->consultar($key, $folio, $tipo);
         $estatus = new \SimpleXmlElement($result);
-        var_dump($estatus);
         
 		return (string)$estatus;
 	}

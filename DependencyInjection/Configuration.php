@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
         	->children()
-        		->scalarNode('key')->defaultNull()->end()
+        		->scalarNode('key')->defaultValue('')->end()
         		->scalarNode('base_uri')->defaultValue('http://webservices.webmaps.com.mx')->end()
         		->end()
         ;		

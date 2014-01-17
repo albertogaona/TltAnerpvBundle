@@ -27,7 +27,7 @@ class TltAnerpvExtension extends Extension
         
         if (!isset($config['key']))
         {
-        	throw new \InvalidArgumentException('Debe proporcionar la opcion "key"');
+        	throw new \InvalidArgumentException('tlt_anerpv: Debe proporcionar la opcion "key"');
         	
         }
         $container->setParameter('tlt_anerpv.key', $config['key']);

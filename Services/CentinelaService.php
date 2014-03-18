@@ -42,6 +42,7 @@ class CentinelaService
         $modelo = new \SoapParam($params['modelo'], 'modelo');
         $color = new \SoapParam($params['color'], 'color');
         $result = $soapClient->reportar($key, $folio, $longitud, $latitud, $fecha, $placa, $modelo, $color);
+		var_dump($result);
         $estatus = new \SimpleXmlElement($result);
         
 		return (string)$estatus;
@@ -65,6 +66,7 @@ class CentinelaService
         $folio = new \SoapParam($params['folio'], 'folio');
         $tipo = new \SoapParam($params['consultarStatusActual']? '1': '0', 'tipo');
         $result = $soapClient->consultar($key, $folio, $tipo);
+		var_dump($result);
         $estatus = new \SimpleXmlElement($result);
         
 		return (string)$estatus;

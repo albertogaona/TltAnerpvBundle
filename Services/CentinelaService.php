@@ -16,6 +16,7 @@ class CentinelaService
 	private $wsdlReportarEmergencia = '/reportarEmergencia.php?wsdl';
 	private $wsdlConsultarStatus = '/consultarStatus.php?wsdl';
 	
+	
 	/**
 	 * Reportar emenrgencia. Los parámetros deben incluir:
 	 * folio: 0 en caso de nueva emergencia, folio previamente asignado en caso de seguimiento
@@ -42,7 +43,8 @@ class CentinelaService
         $modelo = new \SoapParam($params['modelo'], 'modelo');
         $color = new \SoapParam($params['color'], 'color');
         $result = $soapClient->reportar($key, $folio, $longitud, $latitud, $fecha, $placa, $modelo, $color);
-		var_dump($result);
+        $this->container->get('logger')->debug(sprintf("reportarEmergencia. result: '%s'", $result));
+	        
         $estatus = new \SimpleXmlElement($result);
         
 		return (string)$estatus;
@@ -61,15 +63,41 @@ class CentinelaService
 	{
 		$soapClient = new \SoapClient($this->baseUri . $this->wsdlConsultarStatus);
 				
-		$this->container->get('logger')->debug('reportarEmergencia');
+		$this->container->get('logger')->debug('consultarStatus');
         $key = new \SoapParam($this->key, 'key');
         $folio = new \SoapParam($params['folio'], 'folio');
         $tipo = new \SoapParam($params['consultarStatusActual']? '1': '0', 'tipo');
         $result = $soapClient->consultar($key, $folio, $tipo);
-		var_dump($result);
+        $this->container->get('logger')->debug(sprintf("consultarStatus. result: '%s'", $result));
+        
         $estatus = new \SimpleXmlElement($result);
         
-		return (string)$estatus;
+        $resultado = array();
+        $resultado['posiciones'] = array();
+        
+        $resultado['estatusActual'] = (string)$estatus['estatusactual'];
+        
+        if (isset($estatus->posicion) ) {
+        	if ($estatus->posicion == 'Sin Resultados') 
+        	{
+        		$resultado['estatusActual'] = 'Sin Resultados';
+        	} 
+        	else 
+        	{
+        		foreach($estatus->posicion as $p)
+        		{
+        			$posicion = array();
+        			$posicion['lat'] = $p->latitud;
+        			$posicion['lng'] = $p->longitud;
+        			$posicion['fecha'] = $p->fecha;
+        			$posicion['estatus'] = $p->estatus;
+        			$resultado['posiciones'][] = $posicion;
+        		}
+        	}
+        }
+         
+        
+		return $resultado;
 	}
 	
 	public function __construct(Container $container, $key, $baseUri) 

@@ -63,7 +63,7 @@ class CentinelaService
 	{
 		$soapClient = new \SoapClient($this->baseUri . $this->wsdlConsultarStatus);
 				
-		$this->container->get('logger')->debug(sprintf('consultarStatus key=%s, folio=%s', $this->key, $params['folio']);
+		$this->container->get('logger')->debug(sprintf('consultarStatus key=%s, folio=%s', $this->key, $params['folio']));
         $key = new \SoapParam($this->key, 'key');
         $folio = new \SoapParam($params['folio'], 'folio');
         $tipo = new \SoapParam($params['consultarStatusActual']? '1': '0', 'tipo');

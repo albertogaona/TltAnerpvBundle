@@ -74,6 +74,7 @@ class CentinelaService
         
         $resultado = array();
         $resultado['posiciones'] = array();
+		$resultado['reporte'] = (string)$estatus['reporte'];
         
         $resultado['estatusActual'] = (string)$estatus['estatusactual'];
         

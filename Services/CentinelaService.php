@@ -64,18 +64,30 @@ class CentinelaService
 		$soapClient = new \SoapClient($this->baseUri . $this->wsdlConsultarStatus);
 				
 		$this->container->get('logger')->debug(sprintf('consultarStatus key=%s, folio=%s', $this->key, $params['folio']));
-        $key = new \SoapParam($this->key, 'key');
+		$key = new \SoapParam($this->key, 'key');
         $folio = new \SoapParam($params['folio'], 'folio');
         $tipo = new \SoapParam($params['consultarStatusActual']? '1': '0', 'tipo');
         $result = $soapClient->consultar($key, $folio, $tipo);
         $this->container->get('logger')->debug(sprintf("consultarStatus. result: '%s'", $result));
+
+        
         
         $estatus = new \SimpleXmlElement($result);
-        
         $resultado = array();
-        $resultado['posiciones'] = array();
-		$resultado['reporte'] = (string)$estatus['reporte'];
         
+        $reporte = (string)$estatus;
+        $resultado['posiciones'] = array();
+        
+        $this->container->get('logger')->debug(sprintf("consultarStatus. antes de asignar resultado"));
+        
+		$resultado['reporte'] = $reporte;
+		$this->container->get('logger')->debug(sprintf("consultarStatus. reporte: '%s'", $resultado['reporte']));
+		
+		if ($reporte == 'AUTH_ERROR')
+		{
+			return $resultado;
+		}
+		
         $resultado['estatusActual'] = (string)$estatus['estatusactual'];
         
         if (isset($estatus->posicion) ) {
